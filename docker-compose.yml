@@ -9,7 +9,7 @@ services:
         ports:
             - 8080:8080
         volumes:
-            - ./:/go/src/github.com/wyrdnixx/gopoll                        
+            - ./:/go/src/github.com/wyrdnixx/votegovue                  
         networks:
             app-network:                
                 aliases:
