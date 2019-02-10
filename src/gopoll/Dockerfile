@@ -1,6 +1,6 @@
 FROM golang:1.10
 
-WORKDIR /go/src/github.com/wyrdnixx/gopoll
+WORKDIR /go/src/github.com/wyrdnixx/votegovue
 
 COPY . .
 

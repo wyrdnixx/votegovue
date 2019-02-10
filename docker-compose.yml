@@ -7,7 +7,7 @@ services:
             context: .
             dockerfile: ./src/gopoll/Dockerfile
         ports:
-            - 8080:8080
+            - 9000:9000
         volumes:
             - ./:/go/src/github.com/wyrdnixx/votegovue                  
         networks:

@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"log"
 
 	//gonfig -> config aus json file lesen
 	//"github.com/wyrdnixx/mygoproject/cmd/api/modules"
@@ -12,7 +13,8 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	_ "github.com/mattn/go-sqlite3"
+
+	"io/ioutil"
 )
 
 //var AppConfig = modules.Configuration{}
@@ -43,11 +45,21 @@ func main() {
 	})
 	*/
 
-	e.File("/", "public/index.html")
-	e.GET("/pools", handlers.GetPolls(db))
-	e.PUT("/pool/:index", handlers.UpdatePoll(db))
+	// lese Dateien im aktuellen Verzeichniss
+	files, err := ioutil.ReadDir("./")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	e.Logger.Fatal(e.Start(":8080"))
+	for _, f := range files {
+		fmt.Println(f.Name())
+	}
+
+	e.File("/", "src/gopoll/public/index.html")
+	e.GET("/polls", handlers.GetPolls(db))
+	e.PUT("/poll/:index", handlers.UpdatePoll(db))
+
+	e.Logger.Fatal(e.Start(":9000"))
 }
 
 func initDB(filepath string) *sql.DB {
